@@ -1,0 +1,40 @@
+version: '3'
+services:
+  php-cli:
+    build: ./docker/php-cli
+    image: kunit/php72-cli-mysql
+    hostname: php-cli
+    container_name: php-cli
+    volumes:
+      - .:/var/www/html
+      - ./docker/conf/php.ini:/etc/php.ini
+
+  web:
+    build: ./docker/web
+    image: kunit/php72-apache-mysql
+    hostname: web
+    container_name: web
+    volumes:
+      - .:/var/www/html
+      - ./docker/conf/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./docker/conf/php.ini:/etc/php.ini
+    ports:
+      - '80:80'
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    hostname: db
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: app
+      MYSQL_USER: app
+      MYSQL_PASSWORD: app
+    volumes:
+      - ./docker/db/data:/var/lib/mysql
+      - ./docker/db/conf.d:/etc/mysql/conf.d
+      - ./docker/db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
