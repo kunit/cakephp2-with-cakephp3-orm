@@ -34,11 +34,11 @@ class EntityConverterComponent extends Component
      * リクエストデータからCakePHP3のエンティティに変換
      *
      * @param \Cake\ORM\Table $model
-     * @param \Cake\ORM\Entity $entity
+     * @param \Cake\ORM\Entity|null $entity
      * @param array $data
      * @return \Cake\ORM\Entity
      */
-    public function toEntity(\Cake\ORM\Table $model, \Cake\ORM\Entity $entity, array $data) : \Cake\ORM\Entity
+    public function toEntity(\Cake\ORM\Table $model, ?\Cake\ORM\Entity $entity, array $data) : \Cake\ORM\Entity
     {
         $data = Hash::get($data, Inflector::classify($model->getAlias()));
 
