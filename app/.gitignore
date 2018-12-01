@@ -1,4 +1,5 @@
 /Vendor/*
+/Plugin/*
 /tmp/*
 !/tmp/cache/models/empty
 !/tmp/cache/persistent/empty
