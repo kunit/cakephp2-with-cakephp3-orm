@@ -97,7 +97,7 @@ CakeLog::config('error', array(
 require APP . 'Vendor/autoload.php';
 
 // CakePHP3 の ORM を使うための設定を行う
-define('CONFIG_CAKEPHP3', '../../cakephp3/config/');
+define('CONFIG_CAKEPHP3', __DIR__ . '/../../cakephp3/config/');
 
 $dotenv = new \josegonzalez\Dotenv\Loader([CONFIG_CAKEPHP3 . '.env']);
 $dotenv->parse()
