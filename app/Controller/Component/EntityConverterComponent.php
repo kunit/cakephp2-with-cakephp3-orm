@@ -21,8 +21,7 @@ class EntityConverterComponent extends Component
             }
         } else {
             if ($alias === null) {
-                // TODO: もっとスマートな方法がないのか？
-                $alias = str_replace('App\\Model\\Entity\\', '', get_class($entity));
+                $alias = \Cake\Utility\Inflector::classify($entity->getSource());
             }
             $result[$alias] = $entity->toArray();
         }
